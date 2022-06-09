@@ -49,18 +49,30 @@ spring:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
-    url: jdbc:mysql://localhost:3306/FootbalFieldManagement?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/FootbalFieldManagement?useUnicode=true&characterEncoding=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
+    host: smtp.gmail.com
+    username: noReplay.ffm@gmail.com
+    password: ketckhbnzdrwejzh
+    port: 587
+    protocol: smtp
+    properties:
+      'mail.transport.protocol': smtp
+      'mail.smtp.auth': true
+      'mail.smtp.starttls.enable': true
+      'mail.debug': true
+    # from: tranduynhan92@gmail.com
+    # host: smtp.gmail.com
+    # requiresSSL: true
+    # port: 465
+    # username: tranduynhan92@gmail.com
+    # password: 25102000nhan
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   r2dbc:
     url: r2dbc:mysql://localhost:3306/FootbalFieldManagement?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
     username: root
-    password:
+    password: 12345678
   thymeleaf:
     cache: false
   sleuth:

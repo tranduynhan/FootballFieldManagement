@@ -12,13 +12,19 @@ export const PasswordResetFinishPage = (props: RouteComponentProps<{ key: string
   const [password, setPassword] = useState('');
   const [key] = useState(getUrlParameter('key', props.location.search));
   const dispatch = useAppDispatch();
-
+  const resetPasswordSuccess = useAppSelector(state => state.passwordReset.resetPasswordSuccess);
   useEffect(
     () => () => {
       dispatch(reset());
     },
     []
   );
+
+  useEffect(() => {
+    if (resetPasswordSuccess) {
+      props.history.push('/login');
+    }
+  }, [resetPasswordSuccess]);
 
   const handleValidSubmit = ({ newPassword }) => dispatch(handlePasswordResetFinish({ key, newPassword }));
 

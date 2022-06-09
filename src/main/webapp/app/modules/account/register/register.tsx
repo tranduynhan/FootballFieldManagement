@@ -6,10 +6,16 @@ import { toast } from 'react-toastify';
 import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { handleRegister, reset } from './register.reducer';
+import routes from 'app/entities/routes';
+import { Redirect, useHistory } from 'react-router-dom';
 
 export const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
+  const history = useHistory();
+
+  const currentLocale = useAppSelector(state => state.locale.currentLocale);
+  const registrationSuccess = useAppSelector(state => state.register.registrationSuccess);
 
   useEffect(
     () => () => {
@@ -17,11 +23,14 @@ export const RegisterPage = () => {
     },
     []
   );
+  useEffect(() => {
+    if (registrationSuccess) {
+      history.push('/login');
+    }
+  }, [registrationSuccess]);
 
-  const currentLocale = useAppSelector(state => state.locale.currentLocale);
-
-  const handleValidSubmit = ({ username, email, firstPassword }) => {
-    dispatch(handleRegister({ login: username, email, password: firstPassword, langKey: currentLocale }));
+  const handleValidSubmit = async ({ username, email, firstPassword }) => {
+    await dispatch(handleRegister({ login: username, email, password: firstPassword, langKey: currentLocale }));
   };
 
   const updatePassword = event => setPassword(event.target.value);

@@ -62,7 +62,7 @@ spring:
   r2dbc:
     url: r2dbc:mysql://localhost:3306/FootbalFieldManagement?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
     username: root
-    password:
+    password: 12345678
   thymeleaf:
     cache: true
   sleuth:
